@@ -19,7 +19,7 @@ export default function LoginPage() {
                         <div className="w-[80%] flex justify-end mb-4">
                             <a href="#" className="text-gray-500 text-sm">Forgot Password?</a>
                         </div>
-                        <button className="w-[80%] bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-300">Login</button>
+                        <button className="w-[80%] bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-300 cursor-pointer">Login</button>
                     </div>
                     <div className="w-[80%] flex items-center justify-between mt-4">
                         <hr className="w-[35%] border-gray-300" />
