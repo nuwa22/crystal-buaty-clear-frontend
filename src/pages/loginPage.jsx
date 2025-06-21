@@ -1,4 +1,28 @@
+import { useState } from "react";
+import axios from "axios";
+
 export default function LoginPage() {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    function handleLogin(){
+        console.log("Email:", email);
+        console.log("Password:", password);
+        axios.post(import.meta.env.VITE_BACKEND_URL + "/api/user/login", {
+            email: email,
+            password: password
+        }).then(
+            (response) => {
+                console.log("Login successfully", response.data);
+            }
+        ).catch(
+            (error) => {
+                console.log("Login failed", error.response.data);
+            }
+        )
+
+    }
     return (
         <div className= "w-full h-screen bg-gray-300 bg-cover bg-center flex items-center justify-center">
             <div className="w-[70%] h-[90%] bg-white rounded-[30px] shadow-lg  flex ">
@@ -14,12 +38,22 @@ export default function LoginPage() {
                     </div>
                     {/*Input Section */}
                     <div className="w-[80%] flex flex-col items-center w-full">
-                        <input type="email" placeholder="Email" className="w-[80%] p-2 border border-gray-300 rounded mb-4" />
-                        <input type="password" placeholder="Password" className="w-[80%] p-2 border border-gray-300 rounded mb-4" />
+                        <input onChange={
+                            (e) => {
+                                setEmail(e.target.value);
+                            }
+                        }
+                        type="email" placeholder="Email" className="w-[80%] p-2 border border-gray-300 rounded mb-4" />
+                        <input onChange={
+                            (e) => {
+                                setPassword(e.target.value);
+                            }
+                        } type="password" placeholder="Password" className="w-[80%] p-2 border border-gray-300 rounded mb-4" />
                         <div className="w-[80%] flex justify-end mb-4">
                             <a href="#" className="text-gray-500 text-sm">Forgot Password?</a>
                         </div>
-                        <button className="w-[80%] bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-300 cursor-pointer">Login</button>
+                        <button onClick={handleLogin}
+                        className="w-[80%] bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-300 cursor-pointer">Login</button>
                     </div>
                     <div className="w-[80%] flex items-center justify-between mt-4">
                         <hr className="w-[35%] border-gray-300" />
