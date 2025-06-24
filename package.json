@@ -17,7 +17,11 @@
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.2",
-    "tailwindcss": "^4.1.10"
+    "react-tsparticles": "^2.12.2",
+    "tailwindcss": "^4.1.10",
+    "three": "^0.177.0",
+    "tsparticles": "^3.8.1",
+    "vanta": "^0.5.24"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

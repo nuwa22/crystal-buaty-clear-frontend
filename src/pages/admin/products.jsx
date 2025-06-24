@@ -21,7 +21,8 @@ export default function AdminProductsPage() {
     
 
     return (
-        <div className="w-full h-full rounded-lg relative">
+        <div className="w-full h-full relative">
+            <h2 className="text-2xl font-semibold mb-6">Product List</h2>
             <Link to={"/admin/addProduct"} className="text-white absolute bg-gray-700 p-[12px] text-3xl rounded-full cursor-pointer hover:bg-gray-300 hover:text-gray-700 right-5 bottom-5">
                 <FaPlus  />
             </Link>

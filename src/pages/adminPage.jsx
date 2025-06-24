@@ -8,10 +8,8 @@ import AddProductPage from "./admin/addProduct";
 export default function AdminPage() {
   return (
     <div className="flex h-screen bg-[#1e1e2f] text-white">
-      
         <div className="w-[260px] bg-[#111827] p-6 flex flex-col space-y-6 shadow-lg">
             <div className="text-2xl font-bold text-white">CBC</div>
-
                 <div className="space-y-4 mt-4">
                     <Link to="/admin/users" className="flex items-center text-gray-300 hover:text-white transition">
                     <FaUsers className="mr-3 text-lg" /> Users </Link>
@@ -24,7 +22,7 @@ export default function AdminPage() {
 
             <div className="flex-1 flex flex-col bg-[#252636]">
                 <div className="flex items-center justify-between px-6 py-4 border-b border-gray-700 bg-[#2c2d3f]">
-                    <h1 className="text-xl font-semibold text-white">Product List</h1>
+                    <h1 className="text-xl font-semibold text-white">Admin Dashboard</h1>
                     <div className="flex items-center gap-4">
                         <BiBell className="text-2xl text-gray-400 hover:text-white cursor-pointer" />
                         <div className="text-left">
