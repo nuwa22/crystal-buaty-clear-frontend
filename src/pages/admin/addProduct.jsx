@@ -1,3 +1,4 @@
+import { createClient } from "@supabase/supabase-js";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -14,7 +15,10 @@ export default function AddProductPage() {
     const [lebeledPrice, setLebeledPrice] = useState("");
     const [description, setDescription] = useState("");
     const [stock, setStock] = useState("");
+    const [files, setFiles] = useState(null);
     const navigate = useNavigate();
+
+       
 
     function handleSubmit() {
         const altNameInArray = altName.split(",");
@@ -65,10 +69,10 @@ export default function AddProductPage() {
     stock
     */
     return (
-        <div className="w-full h-full relative">
-            <h2 className="text-2xl font-semibold mb-6">Add Product</h2>
-            <div className="w-full flex">
-                <div className="w-1/2  flex flex-col  p-4">
+        <div className="w-full h-full">
+            <h2 className="text-2xl font-semibold mb-6 flex items-center justify-center">Add Product</h2>
+            <div className="w-full flex flex-col items-center justify-center">
+                <div className="w-1/2  flex flex-col p-4">
                     <input
                         value={productId}
                         onChange={
@@ -77,7 +81,7 @@ export default function AddProductPage() {
                                 setProductId(e.target.value);
                             }
                         }
-                        type="text" placeholder="Product ID" className="w-[100%] p-2 border border-gray-300 rounded mb-6" 
+                        type="text" placeholder="Product ID" className="w-[100%] p-2 border border-gray-300 rounded mb-4" 
                     />
                     <input
                         value={productName}
@@ -86,7 +90,7 @@ export default function AddProductPage() {
                                 setProductName(e.target.value);
                             }
                         }
-                        type="text" placeholder="Product Name" className="w-[100%] p-2 border border-gray-300 rounded mb-6" 
+                        type="text" placeholder="Product Name" className="w-[100%] p-2 border border-gray-300 rounded mb-4" 
                     />
                     <input
                         value={altName}
@@ -95,7 +99,7 @@ export default function AddProductPage() {
                                 setAltName(e.target.value);
                             }
                         }
-                        type="text" placeholder="Alternative Names" className="w-[100%] p-2 border border-gray-300 rounded mb-6" 
+                        type="text" placeholder="Alternative Names" className="w-[100%] p-2 border border-gray-300 rounded mb-4" 
                     />
                     <input
                         value={price}
@@ -104,7 +108,7 @@ export default function AddProductPage() {
                                 setPrice(e.target.value);
                             }
                         }
-                        type="number" placeholder="Price (Rs)" className="w-[100%] p-2 border border-gray-300 rounded mb-6" 
+                        type="number" placeholder="Price (Rs)" className="w-[100%] p-2 border border-gray-300 rounded mb-4" 
                     />
                     <input
                         value={lebeledPrice}
@@ -113,7 +117,7 @@ export default function AddProductPage() {
                                 setLebeledPrice(e.target.value);
                             }
                         }
-                        type="number" placeholder="Labelled Price (Rs)" className="w-[100%] p-2 border border-gray-300 rounded mb-6" 
+                        type="number" placeholder="Labelled Price (Rs)" className="w-[100%] p-2 border border-gray-300 rounded mb-4" 
                     />
                     <textarea
                         value={description}
@@ -122,7 +126,7 @@ export default function AddProductPage() {
                                 setDescription(e.target.value);
                             }
                         }
-                        placeholder="Description" className="w-[100%] p-2 border border-gray-300 rounded mb-6" 
+                        placeholder="Description" className="w-[100%] p-2 border border-gray-300 rounded mb-4" 
                     />
                     <input
                         value={stock}
@@ -133,17 +137,22 @@ export default function AddProductPage() {
                         }
                         type="number" placeholder="Stock" className="w-[100%] p-2 border border-gray-300 rounded mb-4" 
                     />
+                    <input
+                        value={files}
+                        onChange={
+                            (e) => {
+                                setFiles(e.target.value);
+                            }
+                        }
+                        type="file" placeholder="Images" className="w-[100%] p-2 border border-gray-300 rounded mb-4" 
+                    />
+                    <div className="w-full h-[50px]  flex items-center justify-between ">
+                        <Link to="/admin/products" className="w-[180px] bg-red-500 p-[8px] rounded-lg text-white text-[20px] font-semibold cursor-pointer hover:bg-red-600 text-center"> Cancel </Link>
+                        <button onClick={handleSubmit} className="w-[180px] bg-green-500 p-[8px] rounded-lg text-white text-[20px] font-semibold cursor-pointer hover:bg-green-600 text-center"> Submit </button>
+                </div>
+                </div>
+                
 
-                </div>
-                <div className="w-1/2 bg-blue-900 relative">
-                    <div>
-                        
-                    </div>
-                    <div className="w-full h-[50px]  flex items-center justify-end p-4 space-x-4 absolute bottom-0">
-                        <Link to="/admin/products" className="w-[150px] bg-red-500 p-[8px] rounded-lg text-white text-[20px] font-semibold cursor-pointer hover:bg-red-600 text-center"> Cancel </Link>
-                        <button onClick={handleSubmit} className="w-[150px] bg-green-500 p-[8px] rounded-lg text-white text-[20px] font-semibold cursor-pointer hover:bg-green-600 text-center"> Submit </button>
-                    </div>
-                </div>
             </div>
             
 
