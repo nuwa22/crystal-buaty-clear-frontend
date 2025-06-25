@@ -4,6 +4,7 @@ import { MdWarehouse } from "react-icons/md";
 import { BiBell } from "react-icons/bi";
 import AdminProductsPage from "./admin/products";
 import AddProductPage from "./admin/addProduct";
+import EditProductPage from "./admin/editProduct";
 
 export default function AdminPage() {
   return (
@@ -38,6 +39,7 @@ export default function AdminPage() {
                     <Route path="/products" element={<AdminProductsPage />} />
                     <Route path="/orders" element={<h1 className="text-lg">Orders</h1>} />
                     <Route path="/addProduct" element={<AddProductPage />} />
+                    <Route path="/editProduct" element={<EditProductPage />} />
                 </Routes>
             </div>
         </div>
