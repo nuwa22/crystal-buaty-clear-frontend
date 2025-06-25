@@ -5,8 +5,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import mediaUpload from "../../utils/meadiaUpload";
 
-// https://iysgivrfihhmwgjcatka.supabase.co
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml5c2dpdnJmaWhobXdnamNhdGthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3ODUyNTEsImV4cCI6MjA2NjM2MTI1MX0.Jxh2CdeBA4dUFqLcxn8R3tK7w1yza9HwKcphUX0XuQs
+
 
 export default function AddProductPage() {
     const [productId, setProductId] = useState("");
@@ -57,7 +56,7 @@ export default function AddProductPage() {
             navigate("/admin/products");
         } catch(error) {
             console.error(error);
-            toast.error("File upload failed");  
+            toast.error("Product added failed");  
         }
     }
 
