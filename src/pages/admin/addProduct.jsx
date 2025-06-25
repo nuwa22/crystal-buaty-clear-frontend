@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import mediaUpload from "../../utils/meadiaUpload";
 
 // https://iysgivrfihhmwgjcatka.supabase.co
 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml5c2dpdnJmaWhobXdnamNhdGthIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3ODUyNTEsImV4cCI6MjA2NjM2MTI1MX0.Jxh2CdeBA4dUFqLcxn8R3tK7w1yza9HwKcphUX0XuQs
@@ -15,59 +16,51 @@ export default function AddProductPage() {
     const [lebeledPrice, setLebeledPrice] = useState("");
     const [description, setDescription] = useState("");
     const [stock, setStock] = useState("");
-    const [files, setFiles] = useState(null);
+    const [images, setImages] = useState([]);
     const navigate = useNavigate();
 
        
 
-    function handleSubmit() {
-        const altNameInArray = altName.split(",");
-        const product = {
-            productId: productId,
-            productName: productName,
-            altName: altNameInArray,
-            price: price,
-            lebeledPrice: lebeledPrice,
-            description: description,
-            stock: stock,
-            images : [
-                "https://via.placeholder.com/150",
-                "https://via.placeholder.com/150",
-                "https://via.placeholder.com/150"
-            ]
+    async function handleSubmit() {
+
+        const promisesArray = [];
+        for(let i = 0; i<images.length; i++) {
+            const promise = mediaUpload(images[i])
+            promisesArray[i] = promise;
+        
         }
+        try{
+            const result = await Promise.all(promisesArray);
+            
+            
+            const altNameInArray = altName.split(",");
+            const product = {
+                productId: productId,
+                productName: productName,
+                altName: altNameInArray,
+                price: price,
+                lebeledPrice: lebeledPrice,
+                description: description,
+                stock: stock,
+                images : result
+            }
         
-        const tocken = localStorage.getItem("token");
-        
-        axios.post(import.meta.env.VITE_BACKEND_URL + "/api/product", product, {
-            headers: {
-                Authorization: `Bearer ${tocken}`
-            }
-        }).then(
-            (response) => {
-                console.log("Product added successfully", response.data);
-                toast.success("Product added successfully");
-                navigate("/admin/products");
-            }
-        ).catch(
-            (error) => {
-                console.log("Error adding product", error.response.data);
-                toast.error("Error adding product");
-            }
-        )
+            const tocken = localStorage.getItem("token");
+            
+            await axios
+                .post(import.meta.env.VITE_BACKEND_URL + "/api/product", product, {
+                    headers: {
+                        Authorization: `Bearer ${tocken}`
+                    }
+                })
+            toast.success("Product added successfully");
+            navigate("/admin/products");
+        } catch(error) {
+            console.error(error);
+            toast.error("File upload failed");  
+        }
     }
 
-
-    /*
-    productId
-    productName
-    altName
-    price
-    lebeledPrice
-    description
-    images
-    stock
-    */
     return (
         <div className="w-full h-full">
             <h2 className="text-2xl font-semibold mb-6 flex items-center justify-center">Add Product</h2>
@@ -128,6 +121,16 @@ export default function AddProductPage() {
                         }
                         placeholder="Description" className="w-[100%] p-2 border border-gray-300 rounded mb-4" 
                     />
+                    {/* Product Images */}
+                    <input
+                        onChange={
+                            (e) => {
+                                setImages(e.target.files);
+                            }
+                        }
+                        multiple
+                        type="file" placeholder="Product Images" className="w-[100%] p-2 border border-gray-300 rounded mb-4" 
+                    />
                     <input
                         value={stock}
                         onChange={
@@ -137,18 +140,10 @@ export default function AddProductPage() {
                         }
                         type="number" placeholder="Stock" className="w-[100%] p-2 border border-gray-300 rounded mb-4" 
                     />
-                    <input
-                        value={files}
-                        onChange={
-                            (e) => {
-                                setFiles(e.target.value);
-                            }
-                        }
-                        type="file" placeholder="Images" className="w-[100%] p-2 border border-gray-300 rounded mb-4" 
-                    />
+                    
                     <div className="w-full h-[50px]  flex items-center justify-between ">
                         <Link to="/admin/products" className="w-[180px] bg-red-500 p-[8px] rounded-lg text-white text-[20px] font-semibold cursor-pointer hover:bg-red-600 text-center"> Cancel </Link>
-                        <button onClick={handleSubmit} className="w-[180px] bg-green-500 p-[8px] rounded-lg text-white text-[20px] font-semibold cursor-pointer hover:bg-green-600 text-center"> Submit </button>
+                        <button onClick={handleSubmit} className="w-[180px] bg-green-500 p-[8px] rounded-lg text-white text-[20px] font-semibold cursor-pointer hover:bg-green-600 text-center"> Add Product </button>
                 </div>
                 </div>
                 
