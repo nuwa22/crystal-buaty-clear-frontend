@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function ProductCard({ product }) {
     return (
         <Link
-            to={`/product/${product.productId}`}
+            to={"/overview/" + product.productId}
             className="w-[250px] h-[350px] bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 m-4"
         >
             <img
@@ -16,11 +16,11 @@ export default function ProductCard({ product }) {
                 <p className="text-lg font-semibold text-gray-800">{product.productName}</p>
                 <p className="mt-1">
                     <span className="text-lg font-bold text-red-600 mr-2">
-                        Rs. {product.price.toFixed(2)}
+                        LKR. {product.price.toFixed(2)}
                     </span>
                     {product.price < product.lebeledPrice && (
                         <span className="text-sm text-gray-500 line-through">
-                            Rs. {product.lebeledPrice.toFixed(2)}
+                            LKR. {product.lebeledPrice.toFixed(2)}
                         </span>
                     )}
                 </p>
