@@ -74,28 +74,28 @@ export default function AdminProductsPage() {
                     products.map(
                         (product, index) => {
                             return (
-                                    <tr key={index} className="border-b-2 border-gray-300 text-left cursor-pointer hover:bg-[#1e1e2f] hover:text-white">
-                                        <td className="px-4 py-3">{product.productId}</td>
-                                        <td className="px-4 py-3">{product.productName}</td>
-                                        <td className="px-4 py-3">{product.price}</td>
-                                        <td className="px-4 py-3">{product.lebeledPrice}</td>
-                                        <td className="px-4 py-3">{product.stock}</td>
-                                        <td className="px-4 py-3">
-                                            <div className="w-full h-full flex">
-                                               <FaRegTrashAlt onClick={() =>{
-                                                    deleteProduct(product.productId);
-                                               }} className="text-[25px] m-[10px] hover:text-red-500" />
-                                               <GrEdit onClick={
+                                <tr key={index} className="border-b-2 border-gray-300 text-left cursor-pointer hover:bg-[#1e1e2f] hover:text-white">
+                                    <td className="px-4 py-3">{product.productId}</td>
+                                    <td className="px-4 py-3">{product.productName}</td>
+                                    <td className="px-4 py-3">{product.price}</td>
+                                    <td className="px-4 py-3">{product.lebeledPrice}</td>
+                                    <td className="px-4 py-3">{product.stock}</td>
+                                    <td className="px-4 py-3">
+                                        <div className="w-full h-full flex">
+                                            <FaRegTrashAlt onClick={() =>{
+                                                deleteProduct(product.productId);
+                                            }} className="text-[25px] m-[10px] hover:text-red-500" />
+                                            <GrEdit onClick={
                                                 () => {
                                                     // Load edit product page
                                                     navigate("/admin/editProduct", {
                                                         state: product
                                                     })
                                                 }
-                                               } className="text-[25px] m-[10px] hover:text-blue-500"/>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            } className="text-[25px] m-[10px] hover:text-blue-500"/>
+                                        </div>
+                                    </td>
+                                </tr>
                             )
                         }
                     )}
