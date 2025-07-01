@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
-import getCart, { addToCart, removeFromCart } from "../../utils/cart"
+import getCart, { addToCart, getTotal, getTotalForLabelledPrice, removeFromCart } from "../../utils/cart"
 import { BiTrash } from "react-icons/bi";
 import { PiPlus } from "react-icons/pi";
 import { BsDash } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 export default function CartPage(){
     
     const [cartLoaded, setCartLoaded] = useState(false);
     const [cart, setCart] = useState([]);
+    const navigate = useNavigate();
     useEffect(() => {
         if(cartLoaded === false){
             const cart = getCart();
@@ -64,7 +66,35 @@ export default function CartPage(){
                         )
                     })
                 }
-                
+                <div className="w-full mt-10 border-t pt-6">
+                    <div className="flex justify-end items-center mb-3">
+                        <h1 className="text-xl md:text-2xl font-semibold text-gray-700 w-[150px] text-right pr-4">Total:</h1>
+                        <h1 className="text-xl md:text-2xl font-bold text-red-500 w-[120px] text-right mr-4 ">{getTotalForLabelledPrice().toFixed(2)}</h1>
+
+                    </div>
+                    <div className="flex justify-end items-center mb-3">
+                        <h1 className="text-xl md:text-2xl font-semibold text-gray-700 w-[150px] text-right pr-4">Discount</h1>
+                        <h1 className="text-xl md:text-2xl font-bold text-red-500 w-[120px] text-right border-b-2 border-dashed mr-4">{(getTotalForLabelledPrice().toFixed(2)-getTotal().toFixed(2))}</h1>
+
+                    </div>
+
+                    <div className="flex justify-end items-center mb-6">
+                        <h1 className="ttext-xl md:text-2xl font-semibold text-gray-700 w-[150px] text-right pr-4">Net Total:</h1>
+                        <h1 className="text-xl md:text-2xl font-bold text-green-600 w-[120px] text-right border-b-4 border-double mr-4">{getTotal().toFixed(2)}</h1>
+
+                    </div>
+                    <div className="flex justify-end">
+                        <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-lg font-medium px-6 py-3 rounded-lg shadow-xl transition duration-300"
+                        onClick={() => {
+                            navigate("/checkout", {
+                                state: {
+                                    items: cart
+                                    
+                                }
+                            })
+                        }}>Checkout</button>
+                    </div>
+                </div>
             </div>
 
         </div>
