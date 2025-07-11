@@ -4,6 +4,8 @@ import ProductPage from "./client/productPage";
 import ProductOverview from "./client/productOverview";
 import CartPage from "./client/cart";
 import CheckOutPage from "./client/checkOut";
+import NotFound from "../components/notFound";
+
 
 
 export default function HomePage() {
@@ -17,7 +19,7 @@ export default function HomePage() {
                     <Route path="/overview/:id" element={<ProductOverview />} />
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/checkout" element={<CheckOutPage />} />
-                    <Route path="/*" element={<h1 className="text-3xl text-center mt-10">404 Not Found</h1>} />
+                    <Route path="/*" element={<NotFound />} />
 
                 </Routes>
             </div>

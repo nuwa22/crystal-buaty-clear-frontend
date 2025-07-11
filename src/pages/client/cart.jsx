@@ -74,7 +74,7 @@ export default function CartPage(){
                     </div>
                     <div className="flex justify-end items-center mb-3">
                         <h1 className="text-xl md:text-2xl font-semibold text-gray-700 w-[150px] text-right pr-4">Discount</h1>
-                        <h1 className="text-xl md:text-2xl font-bold text-red-500 w-[120px] text-right border-b-2 border-dashed mr-4">{(getTotalForLabelledPrice().toFixed(2)-getTotal().toFixed(2))}</h1>
+                        <h1 className="text-xl md:text-2xl font-bold text-red-500 w-[120px] text-right border-b-2 border-dashed mr-4">{(getTotalForLabelledPrice() - getTotal().toFixed(2))}</h1>
 
                     </div>
 

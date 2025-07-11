@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import Loader from "../../components/loader";
 import toast from "react-hot-toast";
 import ImageSlider from "../../components/imageSlider";
 import getCart, { addToCart } from "../../utils/cart";
 
 export default function ProductOverview(){
+    const navigate = useNavigate();
     const params =useParams();
     console.log(params.id);
     if(params.id == null){
@@ -80,7 +81,25 @@ export default function ProductOverview(){
                             }>
                                 Add to Cart
                             </button>
-                            <button className="w-[180px] h-[50px] px-4 py-2 border-2 border-green-600 font-semibold text-green-600 rounded-lg hover:border-green-700 hover:text-green-700 hover:animate- transition duration-200 corsor-pointer">
+                            <button
+                            onClick={() => {
+                                navigate("/checkout", {
+                                    state: {
+                                        items: [
+                                            {
+                                                productId : product.productId,
+                                                name : product.productName,
+                                                altName : product.altName,
+                                                price : product.price,
+                                                lebeledPrice : product.lebeledPrice,
+                                                image : product.images[0],
+                                                quantity : 1
+                                            }
+                                        ]
+                                    }
+                                });
+                            }}
+                            className="w-[180px] h-[50px] px-4 py-2 border-2 border-green-600 font-semibold text-green-600 rounded-lg hover:border-green-700 hover:text-green-700 hover:animate- transition duration-200 corsor-pointer">
                                 Buy Now
                             </button>
                         </div>
