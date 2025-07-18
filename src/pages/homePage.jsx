@@ -10,7 +10,7 @@ import NotFound from "../components/notFound";
 
 export default function HomePage() {
     return (
-        <div className="w-full max-h-screen  ">
+        <div className="w-full max-h-screen mt-[100px]">
             <Header />
             <div className="w-full  min-h-[100%]"> 
                 <Routes path="/*">

@@ -4,6 +4,7 @@ import { BiTrash } from "react-icons/bi";
 import { PiPlus } from "react-icons/pi";
 import { BsDash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function CartPage(){
     
@@ -19,7 +20,7 @@ export default function CartPage(){
     },[cartLoaded]);
 
     return(
-        <div className="w-full min-h-[calc(100vh-70px)] flex justify-center bg-gray-50 p-6 md:p-10 lg:p-16">
+        <div className="w-full min-h-[calc(100vh-70px)] flex justify-center pb-6">
             <div className="w-full max-w-[900px]">
                 {
                     cart.map((item, index)=> {
@@ -84,7 +85,14 @@ export default function CartPage(){
 
                     </div>
                     <div className="flex justify-end">
-                        <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-lg font-medium px-6 py-3 rounded-lg shadow-xl transition duration-300"
+                        <button
+                        disabled={cart.length === 0}
+                        className={`text-lg font-medium px-6 py-3 rounded-lg shadow-xl transition duration-300 
+                            ${
+                            cart.length === 0
+                                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                                : "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white"
+                        }`}
                         onClick={() => {
                             navigate("/checkout", {
                                 state: {

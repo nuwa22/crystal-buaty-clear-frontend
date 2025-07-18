@@ -5,11 +5,12 @@ import { BiBell } from "react-icons/bi";
 import AdminProductsPage from "./admin/products";
 import AddProductPage from "./admin/addProduct";
 import EditProductPage from "./admin/editProduct";
+import AdminOrderPage from "./admin/adminOrder";
 
 export default function AdminPage() {
   return (
     <div className="flex h-screen bg-[#1e1e2f] text-white">
-        <div className="w-[260px] bg-[#111827] p-6 flex flex-col space-y-6 shadow-lg">
+        <div className="w-[180px] bg-[#111827] p-6 flex flex-col space-y-6 shadow-lg">
             <div className="text-2xl font-bold text-white">CBC</div>
                 <div className="space-y-4 mt-4">
                     <Link to="/admin/users" className="flex items-center text-gray-300 hover:text-white transition">
@@ -37,7 +38,7 @@ export default function AdminPage() {
                 <Routes>
                     <Route path="/users" element={<h1 className="text-lg">Users</h1>} />
                     <Route path="/products" element={<AdminProductsPage />} />
-                    <Route path="/orders" element={<h1 className="text-lg">Orders</h1>} />
+                    <Route path="/orders" element={<AdminOrderPage />} />
                     <Route path="/addProduct" element={<AddProductPage />} />
                     <Route path="/editProduct" element={<EditProductPage />} />
                 </Routes>
