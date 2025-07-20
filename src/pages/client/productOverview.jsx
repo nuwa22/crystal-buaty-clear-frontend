@@ -39,7 +39,7 @@ export default function ProductOverview(){
     )
 
     return(
-        <div className="w-full h-full">
+        <div className="w-full h-full ">
             {
                 status == "loading"  && 
                 <div className="w-full h-[calc(100vh-70px)] flex justify-center items-center">
@@ -49,7 +49,7 @@ export default function ProductOverview(){
             {
                 status == "loaded" &&
                 <div className="m-5">
-                <div className="w-full h-full flex flex-col lg:flex-row gap-10 p-6 bg-white rounded-xl shadow-lg">
+                <div className="w-full h-full flex flex-col lg:flex-row gap-10 p-6 pt-0 bg-whiterounded-xl shadow-lg ">
                     <div className="w-[50%] h-full mt-10">
                         
                         <ImageSlider images={product.images} />

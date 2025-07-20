@@ -9,7 +9,11 @@ export default function Header(){
                 <Link to="/products">Products</Link>
                 <Link to="/contact">Contact us</Link>
                 <Link to="/reviews">Reviews</Link>
-                <Link to="/cart" className="absolute right-[30px] text-3xl"><BsCart4 /></Link>
+                <div className="absolute right-[30px] flex items-center justify-between gap-4 ">
+                    <Link to="/login" className="bg-pink-400 w-[100px] h-[40px] flex justify-center items-center rounded-md text-white hover:bg-pink-600">Login</Link>  
+                    <Link to="/cart" className=" text-3xl"><BsCart4 className="text-pink-400 hover:text-pink-600" /></Link>
+                </div>
+                
             </div>
         </header>
     )
