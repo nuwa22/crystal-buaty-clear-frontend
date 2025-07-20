@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
+import { GrGoogle } from "react-icons/gr";
 
 
 export default function LoginPage() {
@@ -10,6 +12,37 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const googleLogin = useGoogleLogin(
+        {
+            onSuccess: (res) => {
+                setLoading(true);
+                axios.post(import.meta.env.VITE_BACKEND_URL + "/api/user/google", {
+                  accessToken: res.access_token,  
+                }).then(
+            (response) => {
+                console.log("Login successfully", response.data);
+                toast.success("Login successfully");
+                localStorage.setItem("token", response.data.token);
+                
+                const user = response.data.user;
+                if(user.role === "admin"){
+                    navigate("/admin");
+                }else{
+                    navigate("/");
+                }
+                setLoading(false);
+            }
+        ).catch(
+            (error) => {
+                console.log("Login failed", error.response.data);
+                toast.error(error.response.data.message || "Login failed");
+                setLoading(false);
+            }
+            
+        )}
+            
+        }
+    )
 
     function handleLogin(){
         setLoading(true);
@@ -84,7 +117,13 @@ export default function LoginPage() {
                     </div>
                     {/* Goodle Login */}
                     <div className="flex items-center justify-center mt-4 w-[80%]">
-                        <button className=" w-full bg-transparent text-black p-2 rounded ml-2 border border-gray-300">Google</button>
+                        <button className=" w-full bg-transparent text-black p-2 rounded ml-2 border border-gray-300 flex items-center justify-center cursor-pointer"
+                        onClick={googleLogin}>
+                            <GrGoogle className="text-xl mr-2 text-gray-600" />
+                            {
+                                loading? "Loading...": "Login with Google"
+                            }
+                        </button>
                     </div>
                     <div className="mt-6 flex items-center justify-center">
                         <p className="text-gray-600">Don't have an account?</p>

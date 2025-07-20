@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import Loader from "../../components/loader";
 import { IoCloseSharp } from "react-icons/io5";
+import toast from "react-hot-toast";
 
 export default function AdminOrderPage(){
 
@@ -28,6 +29,28 @@ export default function AdminOrderPage(){
             }
         }, [loaded]
 )
+
+function handleStatusChange(orderId, status) {
+    const token = localStorage.getItem("token");
+    axios.put(import.meta.env.VITE_BACKEND_URL + "/api/order/"+ orderId,{
+        status: status
+    }, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }).then(
+        toast.success("Order status updated successfully!"),
+        setLoaded(false)
+    ).catch(
+        (error) => {
+            console.error("Error updating order status:", error);
+            toast.error("Failed to update order status.");
+        }
+    );
+
+}
+
+
 
 /*
 {
@@ -58,7 +81,7 @@ export default function AdminOrderPage(){
         <div className="w-full h-full">
             {
                 loaded ?
-                <div className="w-full h-full flex flex-wrap justify-center">
+                <div className="w-full h-full flex flex-wrap justify-center ">
                     <table className="w-full">
                         <thead className="border-b-2 border-gray-300 uppercase tracking-wide">
                         <tr>
@@ -71,24 +94,41 @@ export default function AdminOrderPage(){
                             <th className="px-4 py-3">Status</th>
                             <th className="px-4 py-3">Total</th>
                             <th className="px-4 py-3">Date</th>
+                            <th className="px-4 py-3">Details</th>
                         </tr>
                         </thead>
                         <tbody>
                             {orders.map((order) => (
                                 <tr key={order.orderId}
-                                className="border-b-2 border-gray-300 text-left cursor-pointer hover:bg-[#1e1e2f] hover:text-white"
-                                onClick={() => {
-                                    setModelIsDisplaying(true)
-                                    setDisplayingOrder(order);
-                                    }}>
+                                className="border-b-2 border-gray-300 text-left cursor-pointer hover:bg-[#1e1e2f] hover:text-white">
                                     <td className="px-3 py-2">{order.orderId}</td>
                                     <td className="px-3 py-2">{order.name}</td>
                                     <td className="px-3 py-2">{order.email}</td>
                                     <td className="px-3 py-2">{order.address}</td>
                                     <td className="px-3 py-2">{order.phoneNumber}</td>
-                                    <td className="px-3 py-2">{order.status}</td>
+                                    <td className="px-3 py-2">
+                                        <select className="px-3 py-2 bg-[#111827]" value={order.status} onChange={
+                                            (e)=> {
+                                                handleStatusChange(order.orderId, e.target.value);
+                                            }
+                                        }>
+                                            <option value="pending">Pending</option>
+                                            <option value="processing">Processing</option>
+                                            <option value="delivered">Delivered</option>
+                                            <option value="cancelled">Cancelled</option>
+                                        </select>
+                                    </td>
                                     <td className="px-3 py-2">{order.total.toFixed(2)}</td>
                                     <td className="px-3 py-2">{new Date(order.date).toLocaleDateString()}</td>
+                                    <td className="px-3 py-2">
+                                        <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200"
+                                        onClick={() => {
+                                            setModelIsDisplaying(true)
+                                            setDisplayingOrder(order);
+                                        }}>
+                                            Details
+                                        </button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -149,3 +189,4 @@ export default function AdminOrderPage(){
         </div>
     )
 }
+
