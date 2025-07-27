@@ -5,6 +5,10 @@ import ProductOverview from "./client/productOverview";
 import CartPage from "./client/cart";
 import CheckOutPage from "./client/checkOut";
 import NotFound from "../components/notFound";
+import Home from "./home";
+import Contact from "./client/contactUs";
+import Review from "./client/review";
+
 
 
 
@@ -14,10 +18,12 @@ export default function HomePage() {
             <Header />
             <div className="w-full  min-h-[100%]"> 
                 <Routes path="/*">
-                    <Route path="/" element={<h1 className=" text-3xl text-center mt-10">Welcome to the Home Page</h1>} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/products" element={<ProductPage />} />
                     <Route path="/overview/:id" element={<ProductOverview />} />
                     <Route path="/cart" element={<CartPage />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/reviews" element={<Review />} />
                     <Route path="/checkout" element={<CheckOutPage />} />
                     <Route path="/*" element={<NotFound />} />
 
