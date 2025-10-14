@@ -55,9 +55,13 @@ export default function Home() {
         <div className="text-center text-gray-500">No products found.</div>
       ) : (
         <>
-          <Section className="md:text-center" title="All Products" products={products} />
-          <Section className="md:text-center" title="Most Discounted Products" products={getMostDiscounted()} />
-          <Section className="md:text-center" title="Most Sold Products" products={getMostSold()} />
+          <Section
+            className=""
+            title={<h2 className="text-center md:text-left">All Products</h2>}
+            products={products}
+          />
+          <Section title={<h2 className="text-center md:text-left">Most Discounted Products</h2>} products={getMostDiscounted()} />
+          <Section title={<h2 className="text-center md:text-left">Most Sold Products</h2>} products={getMostSold()} />
         </>
       )}
     </div>
