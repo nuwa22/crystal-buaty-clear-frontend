@@ -95,7 +95,7 @@ export default function LoginPage() {
               className="w-full md:w-[80%] p-2 border border-gray-300 rounded mb-4"
             />
             <div className="w-full md:w-[80%] flex justify-end mb-4">
-              <a href="#" className="text-gray-500 text-sm">
+              <a href="/forget-password" className="text-gray-500 text-sm">
                 Forgot Password?
               </a>
             </div>
