@@ -14,7 +14,7 @@ import Review from "./client/review";
 
 export default function HomePage() {
     return (
-        <div className="w-full max-h-screen mt-[100px]">
+        <div className="w-full max-h-screen mt-[70px]">
             <Header />
             <div className="w-full  min-h-[100%]"> 
                 <Routes path="/*">
