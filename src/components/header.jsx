@@ -2,6 +2,7 @@ import { BsCart4 } from "react-icons/bs";
 import { HiMenu, HiX } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import UserData from "./userData";
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,12 +61,7 @@ export default function Header() {
 
                 
                 <div className="hidden md:flex items-center space-x-4">
-                    <Link
-                        to="/login"
-                        className="border-2 border-white w-[100px] h-[40px] flex justify-center items-center rounded-md hover:bg-white hover:text-[#970747] transition-all duration-300"
-                    >
-                        Login
-                    </Link>
+                    <UserData />
                     <Link to="/cart" className="text-3xl hover:text-gray-200 transition-colors duration-300">
                         <BsCart4 />
                     </Link>
@@ -118,13 +114,7 @@ export default function Header() {
                     ))}
                     
                     
-                    <Link
-                        to="/login"
-                        onClick={toggleMenu}
-                        className="mt-6 border-2 border-white w-full h-[45px] flex justify-center items-center rounded-md hover:bg-white hover:text-[#970747] transition-all duration-300 text-lg"
-                    >
-                        Login
-                    </Link>
+                    <UserData />
                 </nav>
             </div>
         </header>
