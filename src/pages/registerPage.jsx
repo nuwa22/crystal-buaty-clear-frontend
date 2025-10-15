@@ -105,11 +105,12 @@ export default function RegisterPage() {
             phone: formData.phone
         };
         
-        axios.post(import.meta.env.VITE_BACKEND_URL + "/api/user", payload)
+        axios.post(import.meta.env.VITE_BACKEND_URL + "/api/user/", payload)
         .then(() => {
             toast.success("Registered successfully");
             navigate("/login");
         }).catch((error) => {
+            console.log(error);
             console.log("Registration failed", error.response?.data);
             toast.error(error.response?.data?.message || "Registration failed");
         })
@@ -127,7 +128,7 @@ export default function RegisterPage() {
                 <div className="
                     lg:w-1/2 w-full 
                     h-48 sm:h-60 lg:h-auto 
-                    bg-gradient-to-br from-red-900 via-red-800 to-red-700
+                    bg-gradient-to-br from-red-900 via-red-800 to-red-700 snt4800nuwa@gmail.com
                     flex flex-col items-center justify-center 
                     p-6 sm:p-8 lg:p-12
                     relative overflow-hidden
